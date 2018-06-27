@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Block_Jumps
 {
-    public partial class Form1 : Form
+    public partial class Block_Jump : Form
     {
-        public Form1()
+        public Block_Jump()
         {
             InitializeComponent();
         }
