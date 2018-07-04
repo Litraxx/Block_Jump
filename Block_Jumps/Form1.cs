@@ -21,7 +21,7 @@ namespace Block_Jumps
         {
 
         }
-		//Test
+
 		private void ImageToLevel(string levelFile) {
 			//Einlesen des Bildes per File
 			Image img = Image.FromFile(levelFile);
