@@ -15,7 +15,6 @@ namespace Block_Jumps
         // Enum von Typen für Typen
         public enum Type
         {
-            PLAYER,
             AIR,
             LEVEL,
             COIN,
