@@ -12,6 +12,7 @@ namespace Block_Jumps
 {
     public partial class Block_Jump : Form
     {
+        // Enum von Typen für Typen
         public enum Type
         {
             PLAYER,
