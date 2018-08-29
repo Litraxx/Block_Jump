@@ -172,7 +172,7 @@ namespace Block_Jumps
 
         }
 
-        Level level = new Level("H:/EigeneDaten/GDS_Project/testLevel.png");
+        Level level = new Level("../../../testLevel.png");
 
         private void Start()
         {
