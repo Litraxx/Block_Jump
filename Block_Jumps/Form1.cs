@@ -172,10 +172,11 @@ namespace Block_Jumps
 
         }
 
+        Level level = new Level("H:/EigeneDaten/GDS_Project/testLevel.png");
 
         private void Start()
         {
-            Level level = new Level("H:/EigeneDaten/GDS_Project/testLevel.png");
+            
 
             
 
@@ -188,32 +189,41 @@ namespace Block_Jumps
                 Controls.Add(box.PicBox);
                 box.PicBox.Refresh();
             }
-            
-            
+
+            MapTimer();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Start();
         }
+
         //Mapscroll zum scrollen der Map
         public void MapScroll()
         {
-            int xKoord;
+            Box[,] box = level.Boxes; 
 
-            foreach (Box box in level.Boxes)
+            for (int y = 0; y < level.LevelImage.Height; y++)
             {
-                xKoord = box.PicBox.Location.X;
-
-                xKoord++;
-
-                PictureBox pbox = new PictureBox();
-                pbox.Location = box.PicBox.Location;
-                pbox.Location = new Point(xKoord, box.PicBox.Location.Y);
-
+                for (int x = 0; x < level.LevelImage.Width; x++)
+                {
+                    box[x, y].PicBox.Location = new Point(box[x,y].PicBox.Location.X - 1, box[x,y].PicBox.Location.Y);
+                }
             }
+            level.Boxes = box;
+                    //foreach (Box box in level.Boxes)
+                    //{
+                    //    xKoord = box.PicBox.Location.X;
 
-        }
+                    //    xKoord++;
+
+                    //    PictureBox pbox = new PictureBox();
+                    //    pbox.Location = box.PicBox.Location;
+                    //    pbox.Location = new Point(xKoord, box.PicBox.Location.Y);
+
+                    //}
+
+                }
 
         // Timer für Mapscroll und co
         Timer mapTimer = new Timer();
@@ -222,7 +232,7 @@ namespace Block_Jumps
         private void MapTimer()
         {
             
-            mapTimer.Interval = 1000; // Timer Intervalle in Millisekunden (1000 = 1 Sekunde)
+            mapTimer.Interval = 10; // Timer Intervalle in Millisekunden (1000 = 1 Sekunde)
             mapTimer.Enabled = true; //Timer start
 
             mapTimer.Tick += new EventHandler(MapTimerTickEvents);
