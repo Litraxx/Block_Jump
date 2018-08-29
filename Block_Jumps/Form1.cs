@@ -180,5 +180,24 @@ namespace Block_Jumps
             
         }
 
+        //Mapscroll zum scrollen der Map
+        public void MapScroll()
+        {
+            int xKoord;
+
+            foreach (Box box in level.Boxes)
+            {
+                xKoord = box.PicBox.Location.X;
+
+                xKoord++;
+
+                PictureBox pbox = new PictureBox();
+                pbox.Location = box.PicBox.Location;
+                pbox.Location = new Point(xKoord, box.PicBox.Location.Y);
+
+            }
+
+        }
+
     }
 }
