@@ -206,7 +206,7 @@ namespace Block_Jumps
         private void MapTimer()
         {
             
-            mapTimer.Interval = 1000;
+            mapTimer.Interval = 1000; // Timer Intervalle in Millisekunden (1000 = 1 Sekunde)
             mapTimer.Enabled = true; //Timer start
 
             mapTimer.Tick += new EventHandler(MapTimerTickEvents);
