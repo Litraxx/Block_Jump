@@ -199,5 +199,35 @@ namespace Block_Jumps
 
         }
 
+        // Timer für Mapscroll und co
+        Timer mapTimer = new Timer();
+        bool ende = false; //der bool wenn das levelEnde erreicht wurde
+
+        private void MapTimer()
+        {
+            
+            mapTimer.Interval = 1000;
+            mapTimer.Enabled = true; //Timer start
+
+            mapTimer.Tick += new EventHandler(MapTimerTickEvents);
+        }
+
+        private void MapTimerTickEvents(object sender, EventArgs e)
+        {
+
+            if (ende == true)
+            {
+                mapTimer.Enabled = false; //Timer Endet
+            }
+            else
+            {
+                MapScroll();  //Das eine Event was aktuell ausgeführt wird
+                // evtl zu implementier Abfragen zu Collison check unbd sonstiges
+
+            }
+        }
+
+
+
     }
 }
