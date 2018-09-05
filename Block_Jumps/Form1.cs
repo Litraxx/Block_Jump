@@ -72,12 +72,38 @@ namespace Block_Jumps
             public Player(int x, int y)
                 : base(x, y, BoxType.PLAYER, false, Color.Red)
             {
-
+                
             }
 
             public void Jump()
             {
-                // TODO: Logik für Jump hinzufügen
+                //timer2.Stop();
+                int zähler = 0;
+
+
+                while (zähler != 4)
+                {
+                    picBox.Location = new Point(picBox.Location.X + 50);
+
+                   /* if (umkehr)
+                    {
+                        picBox.Location = new Point(picBox.Location.X - 50);
+                    }
+                    else
+                    {
+                        picBox.Location = new Point(picBox.Location.X + 50);
+                    }
+
+                    */
+                    zähler++;
+                   
+                   /* if (zähler == 4)
+                    {
+                        timer1.Stop();
+                    }
+                    */
+
+                }
             }
         }
 
@@ -243,7 +269,49 @@ namespace Block_Jumps
             }
         }
 
+        bool umkehr = false;
 
+   /*     private void Form1_KeyDown(object sender, KeyEventArgs e)
+           {
+
+              timer2.Enabled = true;
+
+            if (e.KeyCode == Keys.Left)
+            {
+                .Left -= 20;
+            }
+            else if (e.KeyCode == Keys.Right)
+            {
+                .Left += 20;
+            }
+            else if (e.KeyCode == Keys.Space)
+            {
+                .Enabled = true;
+            }
+
+            //wechsel Punkt für Graviation
+            if (.Bounds.IntersectsWith(pictureBox4.Bounds))
+            {
+                umkehr = true;
+            }
+        }
+       
+        //Graviatation
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+
+            if (umkehr == false)
+            {
+                pictureBox3.Top += 5;
+            }
+            else
+            {
+                pictureBox3.Top -= 5;
+            }
+
+
+        }
+         */
 
     }
 }
