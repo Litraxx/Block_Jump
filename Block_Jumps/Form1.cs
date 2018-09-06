@@ -38,7 +38,7 @@ namespace Block_Jumps
                 picBox = new PictureBox();
                 type = BoxType.NON;
                 canCollide = false;
-            
+
             }
 
             public Box(int x, int y, BoxType type, bool canCollide, Color color)
@@ -79,7 +79,7 @@ namespace Block_Jumps
         class Player : Box
         {
             public Player()
-                :base()
+                : base()
             {
 
             }
@@ -90,7 +90,7 @@ namespace Block_Jumps
 
             }
 
-           
+
 
             public void Jump()
             {
@@ -179,7 +179,7 @@ namespace Block_Jumps
             }
         }
 
-        
+
 
         public Block_Jump()
         {
@@ -197,17 +197,17 @@ namespace Block_Jumps
 
         private void Start()
         {
-            Point spawn = new Point();   
+            Point spawn = new Point();
 
-            
+
 
             Player player = new Player(10, 10);
-            
+
 
 
             //PictureBox box = new PictureBox();
 
-            foreach(Box box in level.Boxes)
+            foreach (Box box in level.Boxes)
             {
                 if (box.Type == BoxType.SPAWN)
                 {
@@ -220,28 +220,28 @@ namespace Block_Jumps
             player = new Player(spawn.X, spawn.Y);
             Controls.Add(player.PicBox);
             player.PicBox.BringToFront();
-            
+
             MapTimer();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            label1.Hide();
+            label2.Hide();
             button1.Hide();
             running = true;
             Start();
-            }
+        }
 
         //Mapscroll zum scrollen der Map
         public void MapScroll()
         {
-            Box[,] box = level.Boxes; 
+            Box[,] box = level.Boxes;
 
             for (int y = 0; y < level.LevelImage.Height; y++)
             {
                 for (int x = 0; x < level.LevelImage.Width; x++)
                 {
-                    box[x, y].PicBox.Location = new Point(box[x,y].PicBox.Location.X - 1, box[x,y].PicBox.Location.Y);
+                    box[x, y].PicBox.Location = new Point(box[x, y].PicBox.Location.X - 5, box[x, y].PicBox.Location.Y);
                 }
             }
             level.Boxes = box;
@@ -253,8 +253,8 @@ namespace Block_Jumps
 
         private void MapTimer()
         {
-            
-            mapTimer.Interval = 10; // Timer Intervalle in Millisekunden (1000 = 1 Sekunde)
+
+            mapTimer.Interval = 20; // Timer Intervalle in Millisekunden (1000 = 1 Sekunde)
             mapTimer.Enabled = true; //Timer start
 
             mapTimer.Tick += new EventHandler(MapTimerTickEvents);
@@ -289,10 +289,13 @@ namespace Block_Jumps
             {
                 player.Jump();
 
-            }else if (e.KeyCode.Equals(Keys.Escape)){
+            }
+            else if (e.KeyCode.Equals(Keys.Escape))
+            {
 
                 //keine ahnung denkt euch was aus
 
             }
         }
     }
+}
