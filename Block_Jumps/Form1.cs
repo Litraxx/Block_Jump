@@ -18,6 +18,7 @@ namespace Block_Jumps
 
         enum BoxType
         {
+            NON,
             AIR,
             BLOCK,
             COIN,
@@ -31,6 +32,14 @@ namespace Block_Jumps
             protected PictureBox picBox;
             private BoxType type;
             protected bool canCollide;
+
+            public Box()
+            {
+                picBox = new PictureBox();
+                type = BoxType.NON;
+                canCollide = false;
+            
+            }
 
             public Box(int x, int y, BoxType type, bool canCollide, Color color)
             {
@@ -69,6 +78,12 @@ namespace Block_Jumps
 
         class Player : Box
         {
+            public Player()
+                :base()
+            {
+
+            }
+
             public Player(int x, int y)
                 : base(x, y, BoxType.PLAYER, false, Color.Red)
             {
@@ -145,7 +160,7 @@ namespace Block_Jumps
                         //Blau
                         else if (pixels[x, y].A == 255 && pixels[x, y].R == 0 && pixels[x, y].G == 0 && pixels[x, y].B == 255)
                         {
-                            boxes[x, y] = new Box(x * scale, y * scale, BoxType.SPAWN, true, Color.Blue);
+                            boxes[x, y] = new Box(x * scale, y * scale, BoxType.SPAWN, true, Color.Blue); //TODO: zu weiß ändern
                         }
                         //Grün
                         else if (pixels[x, y].A == 255 && pixels[x, y].R == 0 && pixels[x, y].G == 255 && pixels[x, y].B == 0)
@@ -173,30 +188,35 @@ namespace Block_Jumps
         }
 
         Level level = new Level("../../../testLevel.png");
+        Player player = new Player();
 
         private void Start()
         {
-            
-
-            
-
-            Player player = new Player(10, 10);
-
-            //PictureBox box = new PictureBox();
+            Point spawn = new Point();   
 
             foreach(Box box in level.Boxes)
             {
+                if (box.Type == BoxType.SPAWN)
+                {
+                    spawn.X = box.PicBox.Location.X;
+                    spawn.Y = box.PicBox.Location.Y;
+                }
                 Controls.Add(box.PicBox);
                 box.PicBox.Refresh();
             }
-
+            player = new Player(spawn.X, spawn.Y);
+            Controls.Add(player.PicBox);
+            player.PicBox.BringToFront();
+            
             MapTimer();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            label1.Hide();
+            button1.Hide();
             Start();
-        }
+            }
 
         //Mapscroll zum scrollen der Map
         public void MapScroll()
@@ -253,7 +273,9 @@ namespace Block_Jumps
             }
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }
