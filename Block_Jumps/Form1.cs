@@ -75,6 +75,8 @@ namespace Block_Jumps
 
             }
 
+           
+
             public void Jump()
             {
                 // TODO: Logik für Jump hinzufügen
@@ -162,6 +164,8 @@ namespace Block_Jumps
             }
         }
 
+        
+
         public Block_Jump()
         {
             InitializeComponent();
@@ -181,6 +185,8 @@ namespace Block_Jumps
             
 
             Player player = new Player(10, 10);
+            
+
 
             //PictureBox box = new PictureBox();
 
@@ -207,23 +213,16 @@ namespace Block_Jumps
             {
                 for (int x = 0; x < level.LevelImage.Width; x++)
                 {
+                    
+                    
+                    
                     box[x, y].PicBox.Location = new Point(box[x,y].PicBox.Location.X - 1, box[x,y].PicBox.Location.Y);
+
+
                 }
             }
             level.Boxes = box;
-                    //foreach (Box box in level.Boxes)
-                    //{
-                    //    xKoord = box.PicBox.Location.X;
-
-                    //    xKoord++;
-
-                    //    PictureBox pbox = new PictureBox();
-                    //    pbox.Location = box.PicBox.Location;
-                    //    pbox.Location = new Point(xKoord, box.PicBox.Location.Y);
-
-                    //}
-
-                }
+        }
 
         // Timer für Mapscroll und co
         Timer mapTimer = new Timer();
@@ -231,7 +230,7 @@ namespace Block_Jumps
 
         private void MapTimer()
         {
-            
+            Player player = new Player(30, 30); 
             mapTimer.Interval = 10; // Timer Intervalle in Millisekunden (1000 = 1 Sekunde)
             mapTimer.Enabled = true; //Timer start
 
@@ -244,6 +243,7 @@ namespace Block_Jumps
             if (ende == true)
             {
                 mapTimer.Enabled = false; //Timer Endet
+                levelAbgeschlossen();
             }
             else
             {
@@ -253,7 +253,25 @@ namespace Block_Jumps
             }
         }
 
+        // evtl levelabschluss funktion
+        public void levelAbgeschlossen()
+        {
 
+        }
+
+        private void evenHandler_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+
+            if (e.KeyCode.Equals(Keys.Space))
+            {
+                Player.Jump();
+
+            }else if (e.KeyCode.Equals(Keys.Escape)){
+
+                //keine ahnung denkt euch was aus
+
+            }
+        }
 
     }
 }
