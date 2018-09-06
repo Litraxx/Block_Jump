@@ -90,6 +90,8 @@ namespace Block_Jumps
 
             }
 
+           
+
             public void Jump()
             {
                 // TODO: Logik für Jump hinzufügen
@@ -177,6 +179,8 @@ namespace Block_Jumps
             }
         }
 
+        
+
         public Block_Jump()
         {
             InitializeComponent();
@@ -193,6 +197,14 @@ namespace Block_Jumps
         private void Start()
         {
             Point spawn = new Point();   
+
+            
+
+            Player player = new Player(10, 10);
+            
+
+
+            //PictureBox box = new PictureBox();
 
             foreach(Box box in level.Boxes)
             {
@@ -231,19 +243,7 @@ namespace Block_Jumps
                 }
             }
             level.Boxes = box;
-                    //foreach (Box box in level.Boxes)
-                    //{
-                    //    xKoord = box.PicBox.Location.X;
-
-                    //    xKoord++;
-
-                    //    PictureBox pbox = new PictureBox();
-                    //    pbox.Location = box.PicBox.Location;
-                    //    pbox.Location = new Point(xKoord, box.PicBox.Location.Y);
-
-                    //}
-
-                }
+        }
 
         // Timer für Mapscroll und co
         Timer mapTimer = new Timer();
@@ -264,6 +264,7 @@ namespace Block_Jumps
             if (ende == true)
             {
                 mapTimer.Enabled = false; //Timer Endet
+                levelAbgeschlossen();
             }
             else
             {
@@ -273,8 +274,25 @@ namespace Block_Jumps
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        // evtl levelabschluss funktion
+        public void levelAbgeschlossen()
         {
+
+        }
+
+        private void evenHandler_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+
+            if (e.KeyCode.Equals(Keys.Space))
+            {
+                Player.Jump();
+
+            }else if (e.KeyCode.Equals(Keys.Escape)){
+
+                //keine ahnung denkt euch was aus
+
+            }
+        }
 
         }
     }
