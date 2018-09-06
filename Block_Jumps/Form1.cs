@@ -285,7 +285,7 @@ namespace Block_Jumps
 
             if (e.KeyCode.Equals(Keys.Space))
             {
-                Player.Jump();
+                //Player.Jump();
 
             }else if (e.KeyCode.Equals(Keys.Escape)){
 
@@ -296,4 +296,3 @@ namespace Block_Jumps
 
         }
     }
-}
