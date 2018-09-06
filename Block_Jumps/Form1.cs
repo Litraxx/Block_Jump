@@ -295,7 +295,5 @@ namespace Block_Jumps
 
             }
         }
-
-        }
     }
 }
