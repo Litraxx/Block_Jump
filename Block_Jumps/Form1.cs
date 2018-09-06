@@ -193,6 +193,7 @@ namespace Block_Jumps
 
         Level level = new Level("../../../testLevel.png");
         Player player = new Player();
+        bool running = false;
 
         private void Start()
         {
@@ -227,6 +228,7 @@ namespace Block_Jumps
         {
             label1.Hide();
             button1.Hide();
+            running = true;
             Start();
             }
 
@@ -283,16 +285,14 @@ namespace Block_Jumps
         private void evenHandler_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
 
-            if (e.KeyCode.Equals(Keys.Space))
+            if (e.KeyCode.Equals(Keys.Space) && running)
             {
-                //Player.Jump();
+                player.Jump();
 
             }else if (e.KeyCode.Equals(Keys.Escape)){
 
                 //keine ahnung denkt euch was aus
 
             }
-        }
-
         }
     }
