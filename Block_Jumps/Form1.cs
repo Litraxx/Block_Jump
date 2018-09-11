@@ -301,6 +301,36 @@ namespace Block_Jumps
 
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //Gravitation stoppt
+            timer2.Stop();
+            int zähler = 0;
+
+            //Der Sprung
+            while (zähler != 4)
+            {
+                if (umkehr)
+                {
+                    player.PicBox.Top -= 50;
+                }
+                else
+                {
+                    player.PicBox.Top += 50;
+                }
+
+
+                zähler++;
+                //der Sprung stoppt
+                if (zähler == 4)
+                {
+                    timer1.Stop();
+                }
+
+            }
+
+        }
+
         private void Block_Jump_KeyDown(object sender, KeyEventArgs e)
         {
 
