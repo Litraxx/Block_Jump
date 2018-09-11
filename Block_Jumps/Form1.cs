@@ -92,8 +92,25 @@ namespace Block_Jumps
 
             public void Jump()
             {
-                // TODO: Logik für Jump hinzufügen
-            }
+                int zähler = 0;
+
+
+                while (zähler != 4)
+                {
+                    picBox.Location = new Point(picBox.Location.X + 50);
+
+                    /* if (umkehr)
+                     {
+                         picBox.Location = new Point(picBox.Location.X - 50);
+                     }
+                     else
+                     {
+                         picBox.Location = new Point(picBox.Location.X + 50);
+                     }
+
+                     */
+                    zähler++;
+                }
         }
 
         class Level
