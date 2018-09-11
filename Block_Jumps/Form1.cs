@@ -72,11 +72,12 @@ namespace Block_Jumps
             public Player(int x, int y)
                 : base(x, y, BoxType.PLAYER, false, Color.Red)
             {
-                
+
             }
 
             public void Jump()
             {
+                // TODO: Logik für Jump hinzufügen
                 //timer2.Stop();
                 int zähler = 0;
 
@@ -85,25 +86,30 @@ namespace Block_Jumps
                 {
                     picBox.Location = new Point(picBox.Location.X + 50);
 
-                   /* if (umkehr)
-                    {
-                        picBox.Location = new Point(picBox.Location.X - 50);
-                    }
-                    else
-                    {
-                        picBox.Location = new Point(picBox.Location.X + 50);
-                    }
+                    /* if (umkehr)
+                     {
+                         picBox.Location = new Point(picBox.Location.X - 50);
+                     }
+                     else
+                     {
+                         picBox.Location = new Point(picBox.Location.X + 50);
+                     }
 
-                    */
+                     */
                     zähler++;
-                   
-                   /* if (zähler == 4)
-                    {
-                        timer1.Stop();
-                    }
-                    */
+
+                    /* if (zähler == 4)
+                     {
+                         timer1.Stop();
+                     }
+                     */
 
                 }
+            }
+
+            public void gravitation()
+            {
+                picBox.Location = new Point(picBox.Location.X - 50);
             }
         }
 
@@ -198,46 +204,54 @@ namespace Block_Jumps
 
         }
 
+        Level level = new Level("../../../testLevel.png");
 
         private void Start()
         {
-            Level level = new Level("H:/EigeneDaten/GDS_Project/testLevel.png");
-
-            
 
             Player player = new Player(10, 10);
 
             //PictureBox box = new PictureBox();
 
-            foreach(Box box in level.Boxes)
+            foreach (Box box in level.Boxes)
             {
                 Controls.Add(box.PicBox);
                 box.PicBox.Refresh();
             }
-            
-            
+
+            MapTimer();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Start();
         }
+
+
         //Mapscroll zum scrollen der Map
         public void MapScroll()
         {
-            int xKoord;
+            Box[,] box = level.Boxes;
 
-            foreach (Box box in level.Boxes)
+            for (int y = 0; y < level.LevelImage.Height; y++)
             {
-                xKoord = box.PicBox.Location.X;
-
-                xKoord++;
-
-                PictureBox pbox = new PictureBox();
-                pbox.Location = box.PicBox.Location;
-                pbox.Location = new Point(xKoord, box.PicBox.Location.Y);
-
+                for (int x = 0; x < level.LevelImage.Width; x++)
+                {
+                    box[x, y].PicBox.Location = new Point(box[x, y].PicBox.Location.X - 1, box[x, y].PicBox.Location.Y);
+                }
             }
+            level.Boxes = box;
+            //foreach (Box box in level.Boxes)
+            //{
+            //    xKoord = box.PicBox.Location.X;
+
+            //    xKoord++;
+
+            //    PictureBox pbox = new PictureBox();
+            //    pbox.Location = box.PicBox.Location;
+            //    pbox.Location = new Point(xKoord, box.PicBox.Location.Y);
+
+            //}
 
         }
 
@@ -247,8 +261,8 @@ namespace Block_Jumps
 
         private void MapTimer()
         {
-            
-            mapTimer.Interval = 1000; // Timer Intervalle in Millisekunden (1000 = 1 Sekunde)
+
+            mapTimer.Interval = 10; // Timer Intervalle in Millisekunden (1000 = 1 Sekunde)
             mapTimer.Enabled = true; //Timer start
 
             mapTimer.Tick += new EventHandler(MapTimerTickEvents);
@@ -264,42 +278,102 @@ namespace Block_Jumps
             else
             {
                 MapScroll();  //Das eine Event was aktuell ausgeführt wird
-                // evtl zu implementier Abfragen zu Collison check unbd sonstiges
+                              // evtl zu implementier Abfragen zu Collison check unbd sonstiges
 
             }
         }
 
+
+        public Form1()
+        {
+
+            InitializeComponent();
+        }
         bool umkehr = false;
+        //Steuerung mit Keys
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
 
-   /*     private void Form1_KeyDown(object sender, KeyEventArgs e)
-           {
-
-              timer2.Enabled = true;
+            timer2.Enabled = true;
 
             if (e.KeyCode == Keys.Left)
             {
-                .Left -= 20;
+                pictureBox3.Left -= 20;
             }
             else if (e.KeyCode == Keys.Right)
             {
-                .Left += 20;
+                pictureBox3.Left += 20;
             }
             else if (e.KeyCode == Keys.Space)
             {
-                .Enabled = true;
+                timer1.Enabled = true;
             }
 
             //wechsel Punkt für Graviation
-            if (.Bounds.IntersectsWith(pictureBox4.Bounds))
+            if (pictureBox3.Bounds.IntersectsWith(pictureBox4.Bounds))
             {
                 umkehr = true;
             }
         }
-       
+        //Objeckte
+        public void animation()
+        {
+            pictureBox3.Location = pictureBox1.Location;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+
+        }
+        //Sprung   
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //Gravitation stoppt
+            timer2.Stop();
+            int zähler = 0;
+
+            //Der Sprung
+            while (zähler != 4)
+            {
+                if (umkehr)
+                {
+                    pictureBox3.Top -= 50;
+                }
+                else
+                {
+                    pictureBox3.Top += 50;
+                }
+
+
+                zähler++;
+                //der Sprung stoppt
+                if (zähler == 4)
+                {
+                    timer1.Stop();
+                }
+
+            }
+
+        }
         //Graviatation
         private void timer2_Tick(object sender, EventArgs e)
         {
-
+            //wenn Graviattion umgekechrt wird
             if (umkehr == false)
             {
                 pictureBox3.Top += 5;
@@ -311,7 +385,6 @@ namespace Block_Jumps
 
 
         }
-         */
 
     }
 }
