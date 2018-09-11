@@ -301,6 +301,8 @@ namespace Block_Jumps
 
         }
 
+        bool umkehr = false;
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             //Gravitation stoppt
@@ -328,6 +330,21 @@ namespace Block_Jumps
                 }
 
             }
+
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            //wenn Graviattion umgekechrt wird
+            if (umkehr == false)
+            {
+                player.PicBox.Top += 5;
+            }
+            else
+            {
+                player.PicBox.Top -= 5;
+            }
+
 
         }
 
