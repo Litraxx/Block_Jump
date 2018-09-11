@@ -68,18 +68,12 @@ namespace Block_Jumps
                 get { return canCollide; }
                 set { canCollide = value; }
             }
-
-            protected bool Collides()
-            {
-                // TODO: Logik für Collides hinzufügen
-                return false;
-            }
         }
 
         class Player : Box
         {
             public Player()
-                : base()
+                : base(0, 0, BoxType.PLAYER, false, Color.Red)
             {
 
             }
@@ -92,25 +86,7 @@ namespace Block_Jumps
 
             public void Jump()
             {
-                int zähler = 0;
-
-
-                while (zähler != 4)
-                {
-                    picBox.Location = new Point(picBox.Location.X + 50);
-
-                    /* if (umkehr)
-                     {
-                         picBox.Location = new Point(picBox.Location.X - 50);
-                     }
-                     else
-                     {
-                         picBox.Location = new Point(picBox.Location.X + 50);
-                     }
-
-                     */
-                    zähler++;
-                }
+                picBox.Location = new Point(picBox.Location.X, picBox.Location.Y - 5);
             }
         }
 
@@ -217,10 +193,6 @@ namespace Block_Jumps
 
 
 
-            Player player = new Player(10, 10);
-
-
-
             //PictureBox box = new PictureBox();
 
             foreach (Box box in level.Boxes)
@@ -233,11 +205,12 @@ namespace Block_Jumps
                 Controls.Add(box.PicBox);
                 box.PicBox.Refresh();
             }
-            player = new Player(spawn.X, spawn.Y);
+            player.PicBox.Location = spawn;
             Controls.Add(player.PicBox);
             player.PicBox.BringToFront();
-
-            Console.WriteLine("Test");
+            timer1.Tick += new EventHandler(timer1_Tick);
+            timer2.Tick += new EventHandler(timer2_Tick);
+            timer2.Start();
             //MapTimer();
         }
 
@@ -260,40 +233,40 @@ namespace Block_Jumps
             {
                 for (int x = 0; x < level.LevelImage.Width; x++)
                 {
-                    box[x, y].PicBox.Location = new Point(box[x, y].PicBox.Location.X - 5, box[x, y].PicBox.Location.Y);
+                    level.Boxes[x, y].PicBox.Location = new Point(level.Boxes[x, y].PicBox.Location.X - 5, level.Boxes[x, y].PicBox.Location.Y);
                 }
             }
             //level.Boxes = box;
         }
 
         // Timer für Mapscroll und co
-        Timer mapTimer = new Timer();
+        //Timer mapTimer = new Timer();
         //bool ende = false; //der bool wenn das levelEnde erreicht wurde
 
-        private void MapTimer()
-        {
+        //private void MapTimer()
+        //{
 
-            mapTimer.Interval = 20; // Timer Intervalle in Millisekunden (1000 = 1 Sekunde)
-            mapTimer.Enabled = true; //Timer start
+        //    mapTimer.Interval = 20; // Timer Intervalle in Millisekunden (1000 = 1 Sekunde)
+        //    mapTimer.Enabled = true; //Timer start
 
-            mapTimer.Tick += new EventHandler(MapTimerTickEvents);
-        }
+        //    //mapTimer.Tick += new EventHandler(MapTimerTickEvents);
+        //}
 
-        private void MapTimerTickEvents(object sender, EventArgs e)
-        {
+        //private void MapTimerTickEvents(object sender, EventArgs e)
+        //{
 
-            //if (ende == true)
-            //{
-            //    mapTimer.Enabled = false; //Timer Endet
-            //    levelAbgeschlossen();
-            //}
-            //else
-            //{
-            //    MapScroll();  //Das eine Event was aktuell ausgeführt wird
-                // evtl zu implementier Abfragen zu Collison check unbd sonstiges
+        //if (ende == true)
+        //{
+        //    mapTimer.Enabled = false; //Timer Endet
+        //    levelAbgeschlossen();
+        //}
+        //else
+        //{
+        //    MapScroll();  //Das eine Event was aktuell ausgeführt wird
+        // evtl zu implementier Abfragen zu Collison check unbd sonstiges
 
-            //}
-        }
+        //}
+        //}
 
         // evtl levelabschluss funktion
         public void levelAbgeschlossen()
@@ -301,61 +274,84 @@ namespace Block_Jumps
 
         }
 
-        bool umkehr = false;
+        int collisionPoint;
 
+        bool umkehr = false;
+        int zähler = 0;
+       
         private void timer1_Tick(object sender, EventArgs e)
         {
+            int max = 10;
+            PictureBox tmp = new PictureBox();
+            tmp.Location = player.PicBox.Location;
             //Gravitation stoppt
             timer2.Stop();
-            int zähler = 0;
 
             //Der Sprung
-            while (zähler != 4)
+
+            player.Jump();
+            
+            
+
+            zähler++;
+            //der Sprung stoppt
+            if (zähler == max)
             {
-                if (umkehr)
-                {
-                    player.PicBox.Top -= 50;
-                }
-                else
-                {
-                    player.PicBox.Top += 50;
-                }
-
-
-                zähler++;
-                //der Sprung stoppt
-                if (zähler == 4)
-                {
-                    timer1.Stop();
-                }
-
+                timer1.Stop();
+                timer2.Start();
             }
 
+            MapScroll();
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
+            zähler = 0;
             //wenn Graviattion umgekechrt wird
-            if (umkehr == false)
+            if (umkehr)
             {
-                player.PicBox.Top += 5;
+                player.PicBox.Location = new Point(player.PicBox.Location.X, player.PicBox.Location.Y - 5);
             }
             else
             {
-                player.PicBox.Top -= 5;
+                if (!collides())
+                {
+                    player.PicBox.Location = new Point(player.PicBox.Location.X, player.PicBox.Location.Y + 5);
+                }
+                else
+                {
+                    player.PicBox.Location = new Point(player.PicBox.Location.X, collisionPoint);
+                }
+
             }
 
-
+            MapScroll();
         }
 
         private void Block_Jump_KeyDown(object sender, KeyEventArgs e)
         {
-
-            timer2.Enabled = true;
             if (e.KeyCode == Keys.Space)
             {
-                timer1.Enabled = true;
+                timer1.Start();
             }
+        }
+
+        bool collides()
+        {
+            Point tmp = player.PicBox.Location;
+            tmp.Y += 15;
+
+            for(int x = 0; x < level.LevelImage.Width; x++)
+            for (int y = 0; y < level.LevelImage.Height; y++)
+            {
+                if (level.Boxes[x, y].PicBox.Location.Y < tmp.Y + 8 && level.Boxes[x, y].PicBox.Location.Y > tmp.Y - 8 && level.Boxes[x, y].Type == BoxType.BLOCK && level.Boxes[x,y].PicBox.Location.X > -1 && level.Boxes[x, y].PicBox.Location.X < 6)
+                {
+                     collisionPoint = level.Boxes[x, y].PicBox.Location.Y-15;
+                    return true;
+                }
+            }
+            collisionPoint = player.PicBox.Location.Y + 5;
+            return false;
         }
     }
 }

@@ -57,6 +57,11 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Block Jump";
             // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 10;
+            // 
             // Block_Jump
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
