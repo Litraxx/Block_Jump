@@ -303,16 +303,12 @@ namespace Block_Jumps
 
         private void Block_Jump_KeyDown(object sender, KeyEventArgs e)
         {
-            
-            player.PicBox.Location = new Point(0, 0);
-            player.PicBox.BackColor = Color.Black;
-            player.PicBox.Refresh();
-            Console.WriteLine("Jump");
-            foreach (Box box in level.Boxes)
+
+            timer2.Enabled = true;
+            if (e.KeyCode == Keys.Space)
             {
-                box.PicBox.Refresh();
+                timer1.Enabled = true;
             }
-            player.PicBox.BringToFront();
         }
     }
 }
