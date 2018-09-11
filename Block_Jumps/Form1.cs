@@ -308,12 +308,11 @@ namespace Block_Jumps
         {
             zähler = 0;
             //wenn Graviattion umgekechrt wird
-            if (umkehr)
-            {
-                player.PicBox.Location = new Point(player.PicBox.Location.X, player.PicBox.Location.Y - 5);
-            }
-            else
-            {
+            //if (!gameOver())
+            //{
+
+
+
                 if (!collides())
                 {
                     player.PicBox.Location = new Point(player.PicBox.Location.X, player.PicBox.Location.Y + 5);
@@ -323,7 +322,13 @@ namespace Block_Jumps
                     player.PicBox.Location = new Point(player.PicBox.Location.X, collisionPoint);
                 }
 
-            }
+            //}
+            //else
+            //{
+                timer2.Stop();
+                label1.Show();
+            //}
+
 
             MapScroll();
         }
@@ -344,13 +349,29 @@ namespace Block_Jumps
             for(int x = 0; x < level.LevelImage.Width; x++)
             for (int y = 0; y < level.LevelImage.Height; y++)
             {
-                if (level.Boxes[x, y].PicBox.Location.Y < tmp.Y + 8 && level.Boxes[x, y].PicBox.Location.Y > tmp.Y - 8 && level.Boxes[x, y].Type == BoxType.BLOCK && level.Boxes[x,y].PicBox.Location.X > -1 && level.Boxes[x, y].PicBox.Location.X < 6)
+                if (level.Boxes[x, y].PicBox.Location.Y < tmp.Y + 6 && level.Boxes[x, y].PicBox.Location.Y > tmp.Y - 6 && level.Boxes[x, y].Type == BoxType.BLOCK && level.Boxes[x,y].PicBox.Location.X > -1 && level.Boxes[x, y].PicBox.Location.X < 6)
                 {
                      collisionPoint = level.Boxes[x, y].PicBox.Location.Y-15;
                     return true;
                 }
             }
             collisionPoint = player.PicBox.Location.Y + 5;
+            return false;
+        }
+
+        bool gameOver()
+        {
+            Point tmp = player.PicBox.Location;
+            tmp.X += 15;
+
+            for (int x = 0; x < level.LevelImage.Width; x++)
+                for (int y = 0; y < level.LevelImage.Height; y++)
+                {
+                    if (level.Boxes[x, y].PicBox.Location.X < tmp.X + 6 && level.Boxes[x, y].PicBox.Location.X > tmp.X - 6 && level.Boxes[x, y].Type == BoxType.BLOCK)
+                    {
+                        return true;
+                    }
+                }
             return false;
         }
     }

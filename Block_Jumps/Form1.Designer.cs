@@ -33,6 +33,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -62,11 +63,23 @@
             this.timer2.Enabled = true;
             this.timer2.Interval = 10;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.label1.Location = new System.Drawing.Point(50, 76);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(284, 58);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Game Over";
+            this.label1.Visible = false;
+            // 
             // Block_Jump
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(379, 321);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -85,6 +98,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Label label1;
     }
 }
 
