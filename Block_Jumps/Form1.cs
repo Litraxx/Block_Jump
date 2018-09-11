@@ -111,6 +111,7 @@ namespace Block_Jumps
                      */
                     zähler++;
                 }
+            }
         }
 
         class Level
@@ -236,60 +237,63 @@ namespace Block_Jumps
             Controls.Add(player.PicBox);
             player.PicBox.BringToFront();
 
-            MapTimer();
+            Console.WriteLine("Test");
+            //MapTimer();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             label2.Hide();
             button1.Hide();
+            button1.Enabled = false;
+
             running = true;
             Start();
         }
 
         //Mapscroll zum scrollen der Map
-        public void MapScroll()
-        {
-            Box[,] box = level.Boxes;
+        //public void MapScroll()
+        //{
+        //    Box[,] box = level.Boxes;
 
-            for (int y = 0; y < level.LevelImage.Height; y++)
-            {
-                for (int x = 0; x < level.LevelImage.Width; x++)
-                {
-                    box[x, y].PicBox.Location = new Point(box[x, y].PicBox.Location.X - 5, box[x, y].PicBox.Location.Y);
-                }
-            }
-            level.Boxes = box;
-        }
+        //    for (int y = 0; y < level.LevelImage.Height; y++)
+        //    {
+        //        for (int x = 0; x < level.LevelImage.Width; x++)
+        //        {
+        //            box[x, y].PicBox.Location = new Point(box[x, y].PicBox.Location.X - 5, box[x, y].PicBox.Location.Y);
+        //        }
+        //    }
+        //    //level.Boxes = box;
+        //}
 
         // Timer für Mapscroll und co
         Timer mapTimer = new Timer();
         bool ende = false; //der bool wenn das levelEnde erreicht wurde
 
-        private void MapTimer()
-        {
+        //private void MapTimer()
+        //{
 
-            mapTimer.Interval = 20; // Timer Intervalle in Millisekunden (1000 = 1 Sekunde)
-            mapTimer.Enabled = true; //Timer start
+        //    mapTimer.Interval = 20; // Timer Intervalle in Millisekunden (1000 = 1 Sekunde)
+        //    mapTimer.Enabled = true; //Timer start
 
-            mapTimer.Tick += new EventHandler(MapTimerTickEvents);
-        }
+        //    mapTimer.Tick += new EventHandler(MapTimerTickEvents);
+        //}
 
-        private void MapTimerTickEvents(object sender, EventArgs e)
-        {
+        //private void MapTimerTickEvents(object sender, EventArgs e)
+        //{
 
-            if (ende == true)
-            {
-                mapTimer.Enabled = false; //Timer Endet
-                levelAbgeschlossen();
-            }
-            else
-            {
-                MapScroll();  //Das eine Event was aktuell ausgeführt wird
-                // evtl zu implementier Abfragen zu Collison check unbd sonstiges
+        //    if (ende == true)
+        //    {
+        //        mapTimer.Enabled = false; //Timer Endet
+        //        levelAbgeschlossen();
+        //    }
+        //    else
+        //    {
+        //        MapScroll();  //Das eine Event was aktuell ausgeführt wird
+        //        // evtl zu implementier Abfragen zu Collison check unbd sonstiges
 
-            }
-        }
+        //    }
+        //}
 
         // evtl levelabschluss funktion
         public void levelAbgeschlossen()
@@ -297,20 +301,17 @@ namespace Block_Jumps
 
         }
 
-        private void evenHandler_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        private void Block_Jump_KeyDown(object sender, KeyEventArgs e)
         {
-
-            if (e.KeyCode.Equals(Keys.Space) && running)
+            player.PicBox.Location = new Point(0, 0);
+            player.PicBox.BackColor = Color.Black;
+            player.PicBox.Refresh();
+            Console.WriteLine("Jump");
+            foreach (Box box in level.Boxes)
             {
-                player.Jump();
-
+                box.PicBox.Refresh();
             }
-            else if (e.KeyCode.Equals(Keys.Escape))
-            {
-
-                //keine ahnung denkt euch was aus
-
-            }
+            player.PicBox.BringToFront();
         }
     }
 }
