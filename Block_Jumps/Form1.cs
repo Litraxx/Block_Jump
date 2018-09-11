@@ -90,8 +90,6 @@ namespace Block_Jumps
 
             }
 
-
-
             public void Jump()
             {
                 // TODO: Logik für Jump hinzufügen
