@@ -141,6 +141,7 @@ namespace Block_Jumps
         Player player = new Player();
         int collisionPoint;
         int zähler = 0;
+        bool gameover = false;
 
         public Block_Jump()
         {
@@ -220,6 +221,15 @@ namespace Block_Jumps
             }
             zähler++;
 
+            if (player.PicBox.Location.Y == level.LevelImage.Height * player.PicBox.Size.Height || player.PicBox.Location.Y < -6)
+            {
+                //GameOver wenn unter oder über des Levels
+                gameover = true;
+                gravity.Stop();
+                jump.Stop();
+                lblGameover.Show();
+            }
+
             MapScroll();
         }
 
@@ -234,18 +244,20 @@ namespace Block_Jumps
                 //Gravitation
                 player.PicBox.Location = new Point(player.PicBox.Location.X, player.PicBox.Location.Y + 5);
             }
-            else if (player.PicBox.Location.Y == level.LevelImage.Height * player.PicBox.Size.Height || player.PicBox.Location.Y == 0)
-            {
-                //GameOver wenn unter oder über des Levels
-                gravity.Stop();
-                lblGameover.Show();
-            }
             else
             {
                 //Playerposition "auf die kollision" setzen 
                 player.PicBox.Location = new Point(player.PicBox.Location.X, collisionPoint);
             }
 
+            if (player.PicBox.Location.Y == level.LevelImage.Height * player.PicBox.Size.Height || player.PicBox.Location.Y < -6)
+            {
+                //GameOver wenn unter oder über des Levels
+                gameover = true;
+                gravity.Stop();
+                jump.Stop();
+                lblGameover.Show();
+            }
 
             MapScroll();
         }
@@ -253,7 +265,7 @@ namespace Block_Jumps
         //KeyDown Schaut ob der User die Leertaste gedrückt hat
         private void Block_Jump_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Space)
+            if (e.KeyCode == Keys.Space && !gameover)
             {
                 //Starten des Sprungtimers
                 jump.Start();
