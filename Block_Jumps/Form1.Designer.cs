@@ -29,32 +29,32 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.jump = new System.Windows.Forms.Timer(this.components);
             this.gravity = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblGameover = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // button1
+            // btnStart
             // 
-            this.button1.Location = new System.Drawing.Point(102, 135);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Start";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnStart.Location = new System.Drawing.Point(101, 89);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.TabIndex = 0;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label2
+            // lblTitle
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.label2.Location = new System.Drawing.Point(65, 62);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(154, 31);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Block Jump";
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.lblTitle.Location = new System.Drawing.Point(64, 30);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(154, 31);
+            this.lblTitle.TabIndex = 1;
+            this.lblTitle.Text = "Block Jump";
             // 
             // jump
             // 
@@ -65,26 +65,27 @@
             this.gravity.Enabled = true;
             this.gravity.Interval = 50;
             // 
-            // label1
+            // lblGameover
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.label1.Location = new System.Drawing.Point(38, 62);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(224, 46);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Game Over";
-            this.label1.Visible = false;
+            this.lblGameover.AutoSize = true;
+            this.lblGameover.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.lblGameover.Location = new System.Drawing.Point(27, 30);
+            this.lblGameover.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblGameover.Name = "lblGameover";
+            this.lblGameover.Size = new System.Drawing.Size(224, 46);
+            this.lblGameover.TabIndex = 2;
+            this.lblGameover.Text = "Game Over";
+            this.lblGameover.Visible = false;
             // 
             // Block_Jump
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(284, 141);
+            this.Controls.Add(this.lblGameover);
+            this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.btnStart);
+            this.MaximumSize = new System.Drawing.Size(400, 180);
             this.Name = "Block_Jump";
             this.Text = "Block Jump";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Block_Jump_KeyDown);
@@ -95,11 +96,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Timer jump;
         private System.Windows.Forms.Timer gravity;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblGameover;
     }
 }
 

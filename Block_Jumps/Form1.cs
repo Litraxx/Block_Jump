@@ -182,9 +182,9 @@ namespace Block_Jumps
         //Startbutton
         private void button1_Click(object sender, EventArgs e)
         {
-            label2.Hide();
-            button1.Hide();
-            button1.Enabled = false;
+            lblTitle.Hide();
+            btnStart.Hide();
+            btnStart.Enabled = false;
 
             Start();
         }
@@ -234,11 +234,18 @@ namespace Block_Jumps
                 //Gravitation
                 player.PicBox.Location = new Point(player.PicBox.Location.X, player.PicBox.Location.Y + 5);
             }
+            else if (player.PicBox.Location.Y == level.LevelImage.Height * player.PicBox.Size.Height || player.PicBox.Location.Y == 0)
+            {
+                //GameOver wenn unter oder über des Levels
+                gravity.Stop();
+                lblGameover.Show();
+            }
             else
             {
                 //Playerposition "auf die kollision" setzen 
                 player.PicBox.Location = new Point(player.PicBox.Location.X, collisionPoint);
             }
+
 
             MapScroll();
         }
