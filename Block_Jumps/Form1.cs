@@ -102,6 +102,7 @@ namespace Block_Jumps
                 {
                     for (int x = 0; x < map.Width; x++)
                     {
+                        //Einlesen des Pixels
                         pixels[x, y] = map.GetPixel(x, y);
                     }
                 }
@@ -111,7 +112,8 @@ namespace Block_Jumps
                 {
                     for (int x = 0; x < map.Width; x++)
                     {
-                        //Weiß
+                        //Erstellen von Boxen nach Farbe
+                        //Weiß 
                         if (pixels[x, y].A == 255 && pixels[x, y].R == 255 && pixels[x, y].G == 255 && pixels[x, y].B == 255)
                         {
                             boxes[x, y] = new Box(x * scale, y * scale, BoxType.AIR, false, Color.White);
