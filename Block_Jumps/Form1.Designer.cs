@@ -31,17 +31,16 @@
             this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.jump = new System.Windows.Forms.Timer(this.components);
+            this.gravity = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(136, 166);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(102, 135);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 28);
+            this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "Start";
             this.button1.UseVisualStyleBackColor = true;
@@ -51,41 +50,43 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.label2.Location = new System.Drawing.Point(87, 76);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(65, 62);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(193, 39);
+            this.label2.Size = new System.Drawing.Size(154, 31);
             this.label2.TabIndex = 1;
             this.label2.Text = "Block Jump";
             // 
-            // timer2
+            // jump
             // 
-            this.timer2.Enabled = true;
-            this.timer2.Interval = 10;
+            this.jump.Interval = 50;
+            // 
+            // gravity
+            // 
+            this.gravity.Enabled = true;
+            this.gravity.Interval = 50;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.label1.Location = new System.Drawing.Point(50, 76);
+            this.label1.Location = new System.Drawing.Point(38, 62);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(284, 58);
+            this.label1.Size = new System.Drawing.Size(224, 46);
             this.label1.TabIndex = 2;
             this.label1.Text = "Game Over";
             this.label1.Visible = false;
             // 
             // Block_Jump
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 321);
+            this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Block_Jump";
             this.Text = "Block Jump";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Block_Jump_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -96,8 +97,8 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Timer jump;
+        private System.Windows.Forms.Timer gravity;
         private System.Windows.Forms.Label label1;
     }
 }
